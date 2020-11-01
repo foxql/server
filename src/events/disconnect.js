@@ -1,10 +1,9 @@
-const name = 'get-offer';
+const name = 'disconnect';
 
 exports.listener = (socket, server, data) => {
-
     const id = socket.id;
 
-    socket.emit(name, server.clients.filter(e => e !== id));
+    server.disconnectClient(id);
 }
 
 exports.name = name;
