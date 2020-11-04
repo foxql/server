@@ -78,6 +78,11 @@ class server{
     {
         this.eventList.push(event);
     }
+
+    clientList(id, count)
+    {
+        return this.clients.filter(e => e !== id).slice(0, count);
+    }
 }
 
 module.exports = server;

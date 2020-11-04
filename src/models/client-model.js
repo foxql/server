@@ -1,6 +1,7 @@
 module.exports = class {
 
-    offers = [];
+    connections = [];
+    offerSdp;
 
     constructor()
     {
@@ -9,16 +10,16 @@ module.exports = class {
 
     push(id)
     {
-        if(!this.offers.includes(id)) this.offers.push(id);
+        if(!this.connections.includes(id)) this.connections.push(id);
     }
 
     list()
     {
-        return this.offers;
+        return this.connections;
     }
 
     drop(offerId)
     {
-        this.offers = this.offers.filter(e => e !== offerId)
+        this.connections = this.connections.filter(e => e !== offerId)
     }
 }

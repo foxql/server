@@ -1,4 +1,6 @@
 module.exports = [
-    require('./events/get-offer.js'),
-    require('./events/disconnect.js')
+    require('./events/disconnect.js'),
+    require('./events/findNewNodes.js'),
+    require('./events/callUser.js'),
+    require('./events/makeAnswer.js')
 ];

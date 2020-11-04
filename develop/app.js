@@ -7,5 +7,5 @@ server.open();
 
 async function connection(socket)
 {
-    console.log('Birisi bağlandı!');
+    //console.log('Birisi bağlandı!');
 }
