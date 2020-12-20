@@ -4,6 +4,18 @@ Basic websocket server for foxql-peer
 
 ## Documentation
 
+### Install
+
+```
+npm i @foxql/foxql-server
+```
+
+### Run
+```
+npm run dev
+```
+
+
 #### Basic usage
 ``` javascript
 const foxql = require('../index.js');
