@@ -1,11 +1,10 @@
 module.exports = class {
 
     connections = [];
-    offerSdp;
 
     constructor()
     {
-
+        
     }
 
     push(id)
@@ -18,8 +17,13 @@ module.exports = class {
         return this.connections;
     }
 
-    drop(offerId)
+    drop(id)
     {
-        this.connections = this.connections.filter(e => e !== offerId)
+        this.connections = this.connections.filter(e => e !== id)
+    }
+
+    lenght()
+    {
+        return this.connections.length;
     }
 }

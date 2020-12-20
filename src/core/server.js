@@ -1,5 +1,5 @@
 const app = require('express')();
-const clientModel = require('../models/client-model.js')
+const clientModel = require('../models/clientModel.js')
 class server{
 
     eventList = require('../events.js');
@@ -38,7 +38,7 @@ class server{
 
             this.io.on('connection', socket => {
                 const id = socket.id;
-                socket.connections = new clientModel();
+                socket.offers = new clientModel();
                 this.pushClient(id);
 
                 this.loadEvents(socket);
@@ -79,9 +79,13 @@ class server{
         this.eventList.push(event);
     }
 
-    clientList(id, count)
+    findAvaliableClient(id, count, connectionList)
     {
-        return this.clients.filter(e => e !== id).slice(0, count);
+        return this.clients.filter(e => {
+            if(e !== id && !connectionList.includes(e)){
+                return true;
+            }
+        }).slice(0, count);
     }
 }
 
