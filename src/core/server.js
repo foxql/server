@@ -1,5 +1,4 @@
 const app = require('express')();
-const clientModel = require('../models/clientModel.js')
 class server{
 
     eventList = require('../events.js');
@@ -10,7 +9,7 @@ class server{
         protocol : 'http'
     };
 
-    clients = [];
+    clientMap = {};
 
     io;
     server;
@@ -38,7 +37,6 @@ class server{
 
             this.io.on('connection', socket => {
                 const id = socket.id;
-                socket.offers = new clientModel();
                 this.pushClient(id);
 
                 this.loadEvents(socket);
@@ -66,12 +64,31 @@ class server{
 
     pushClient(id)
     {
-        this.clients.push(id);
+        if(this.clientMap[id] == undefined) this.clientMap[id] = [];
     }
 
     disconnectClient(id)
     {
-        this.clients = this.clients.filter(e => e !== id)
+        delete this.clientMap[id];
+    }
+
+    pushClientConnection(id, offerId)
+    {
+        if(this.clientMap[id]) this.clientMap[id].push(offerId);
+    }
+
+    getClientConnections(id)
+    {
+        return this.clientMap[id] || [];
+    }
+
+    dropClientConnection(id, offerId)
+    {
+        let connectionsList = this.getClientConnections(id);
+        const findConnectionIndex = connectionsList.indexOf(offerId);
+        if(findConnectionIndex > -1){
+            this.clientMap[id] = connectionsList.splice(findConnectionIndex, 1)
+        }
     }
 
     pushEvent(event)
@@ -81,8 +98,13 @@ class server{
 
     findAvaliableClient(id, count, connectionList)
     {
-        return this.clients.filter(e => {
+        const currentClients = Object.keys(this.clientMap);
+        return currentClients.filter(e => {
             if(e !== id && !connectionList.includes(e)){
+                const targetOfferConnectionList = this.getClientConnections(e)
+                if(targetOfferConnectionList.includes(id)){
+                    return false;
+                }
                 return true;
             }
         }).slice(0, count);

@@ -3,11 +3,12 @@ const name = 'call';
 async function listener(socket, network, size)
 {
     const myId = socket.id;
-    const findOffers = network.findAvaliableClient(myId, size, socket.offers.list());
+    let findOffers = network.findAvaliableClient(myId, size, network.getClientConnections(myId));
     if(findOffers.length <= 0) return
 
-    findOffers.forEach(id => {
-        socket.offers.push(id);
+
+    findOffers.forEach(offerId => {
+        network.pushClientConnection(myId, offerId)
     });
 
     socket.emit('call', findOffers);

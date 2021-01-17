@@ -4,12 +4,10 @@ async function listener(socket, network)
 {
     const id = socket.id;
 
-    const connectionList = socket.offers.list();
+    const connectionList = network.getClientConnections(id);
     if(connectionList.length > 0) {
-        connectionList.forEach(socketId => {
-           const connection = network.io.sockets.sockets[socketId] || false;
-           if(!connection) return false;
-           connection.offers.drop(id);
+        connectionList.forEach(offerId => {
+            network.dropClientConnection(offerId, id);
         });
     }
 
