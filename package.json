@@ -1,6 +1,6 @@
 {
   "name": "@foxql/foxql-server",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Basic websocket server for foxql-peer",
   "main": "index.js",
   "scripts": {
@@ -8,14 +8,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/boraozer/foxql-server.git"
+    "url": "git+https://github.com/foxql/server.git"
   },
   "author": "Bora Erdinç Özer",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/boraozer/foxql-server/issues"
+    "url": "https://github.com/foxql/server/issues"
   },
-  "homepage": "https://github.com/boraozer/foxql-server#readme",
+  "homepage": "https://github.com/foxql/server#readme",
   "dependencies": {
     "express": "^4.17.1",
     "http": "0.0.1-security",
