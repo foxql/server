@@ -28,7 +28,7 @@ server.open();
 
 #### Change Configurations
 ``` javascript
-const foxql = require('../index.js');
+const foxql = require('@foxql/foxql-server');
 
 const server = new foxql.server();
 
@@ -43,7 +43,7 @@ server.open();
 
 #### Custom socket listener
 ``` javascript
-const foxql = require('../index.js');
+const foxql = require('@foxql/foxql-server');
 
 const server = new foxql.server(connection);
 
