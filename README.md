@@ -18,7 +18,7 @@ npm run dev
 
 #### Basic usage
 ``` javascript
-const foxql = require('../index.js');
+const foxql = require('@foxql/foxql-server');
 
 const server = new foxql.server();
 
