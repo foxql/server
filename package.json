@@ -1,6 +1,6 @@
 {
   "name": "@foxql/foxql-server",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "Basic websocket server for foxql-peer",
   "main": "index.js",
   "scripts": {
@@ -19,6 +19,6 @@
   "dependencies": {
     "express": "^4.17.1",
     "http": "0.0.1-security",
-    "socket.io": "^2.3.0"
+    "socket.io": "^4.1.2"
   }
 }
