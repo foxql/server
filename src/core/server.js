@@ -1,26 +1,27 @@
 const app = require('express')();
+
 class server{
 
-    eventList = require('../events.js');
-
-    serverOptions = {
-        port: 1923,
-        host: '127.0.0.1',
-        protocol : 'http'
-    };
-
-    clientMap = {};
-
-    io;
-    server;
-
-    avaliableUseKeys = [
-        'serverOptions'
-    ];
-
-    socketConnectionListener;
-
     constructor(socketConnectionListener) {
+
+        this.io = null;
+
+        this.server = null;
+
+        this.avaliableUseKeys = [
+            'serverOptions'
+        ];
+
+        this.serverOptions = {
+            port: 1923,
+            host: '127.0.0.1',
+            protocol : 'http'
+        };
+
+        this.clientMap = {};
+
+        this. eventList = require('../events.js');
+
         this.socketConnectionListener = socketConnectionListener;
     }
 
