@@ -1,12 +1,15 @@
 const foxql = require('../index.js');
 
-const server = new foxql.server(connection);
+const server = new foxql.server(connection, [
+    'http://127.0.0.1:1923'
+]);
 
 
 server.use('serverOptions', {
-    port : 1923,
+    port : 1924,
     host : '0.0.0.0'
 });
+
 server.open();  
 
 
