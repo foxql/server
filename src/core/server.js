@@ -1,8 +1,10 @@
 const app = require('express')();
 
-class server{
+class server extends require('./bridges'){ 
 
-    constructor(socketConnectionListener) {
+    constructor(socketConnectionListener, bridgeList) {
+
+        super(bridgeList)
 
         this.io = null;
 
@@ -20,7 +22,7 @@ class server{
 
         this.clientMap = {};
 
-        this. eventList = require('../events.js');
+        this.eventList = require('../events.js');
 
         this.socketConnectionListener = socketConnectionListener;
     }
@@ -32,6 +34,9 @@ class server{
 
     open()
     {
+
+        this.registerBridgeList()
+
         if(this.serverOptions.protocol == 'http'){
             this.server = require('http').createServer(app);
             this.io = require('socket.io')(this.server);
