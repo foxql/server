@@ -1,4 +1,4 @@
-const { io } = require("socket.io-client");
+const { io, protocol } = require("socket.io-client");
 
 module.exports  = class {
 
@@ -11,10 +11,11 @@ module.exports  = class {
 
     registerBridgeList()
     {
+        const nodeIpAddress = this.buildNodeIpAddress()
         this.bridgeList.forEach(host => {
             const socket = io(host)
             socket.on('connect', function (){
-                socket.emit('register', host)
+                socket.emit('register', nodeIpAddress)
             })
             socket.on('transport', this.transportListener)
             this.subscriptions[host] = socket
@@ -24,6 +25,14 @@ module.exports  = class {
     transportListener(data)
     {
         console.log(data)
+    }
+
+    buildNodeIpAddress()
+    {
+        const {protocol, port} = this.serverOptions
+        return {
+            protocol, port
+        }
     }
 
 }
