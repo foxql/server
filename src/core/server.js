@@ -34,9 +34,6 @@ class server extends require('./bridges'){
 
     open()
     {
-
-        this.registerBridgeList()
-
         if(this.serverOptions.protocol == 'http'){
             this.server = require('http').createServer(app);
             this.io = require('socket.io')(this.server);
@@ -57,6 +54,7 @@ class server extends require('./bridges'){
             });
             this.server.listen(this.serverOptions.port, (req, res) => {
                 console.log('Foxql server is running...');
+                this.registerBridgeList()
             });
         }
     }
