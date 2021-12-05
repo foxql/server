@@ -36,7 +36,12 @@ class server extends require('./bridges'){
     {
         if(this.serverOptions.protocol == 'http'){
             this.server = require('http').createServer(app);
-            this.io = require('socket.io')(this.server);
+            this.io = require('socket.io')(this.server,{
+                cors: {
+                    origin: "*",
+                    methods: ["GET", "POST"]
+                }
+            });
 
             this.io.on('connection', socket => {
                 const id = socket.id;
