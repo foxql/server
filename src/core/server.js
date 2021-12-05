@@ -1,4 +1,5 @@
 const app = require('express')();
+const sha256 = require("crypto-js/sha256");
 
 class server extends require('./bridges'){ 
 
@@ -44,7 +45,9 @@ class server extends require('./bridges'){
             });
 
             this.io.on('connection', socket => {
+                const {origin} = socket.request.headers;
                 const id = socket.id;
+
                 this.pushClient(id);
 
                 this.loadEvents(socket);
@@ -52,6 +55,10 @@ class server extends require('./bridges'){
                 if(typeof this.socketConnectionListener === 'function'){
                     this.socketConnectionListener(socket);
                 }
+                
+                socket.join(
+                    this.encryptOrigin(origin)
+                )
             })
 
             app.get('/', (req, res) => {
@@ -118,6 +125,13 @@ class server extends require('./bridges'){
             }
         }).slice(0, count);
     }
+
+    encryptOrigin(origin)
+    {
+        return sha256(origin)
+    }
+
+    
 }
 
 module.exports = server;
