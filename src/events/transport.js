@@ -1,6 +1,6 @@
 const name = 'transport';
 
-async function listener(socket, network)
+async function listener(socket, data)
 {
     console.log('Transport listener is fired!')
 }

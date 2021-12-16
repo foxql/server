@@ -24,7 +24,7 @@ module.exports  = class {
 
     transportListener(data)
     {
-        console.log(data)
+        //console.log(data)
     }
 
     buildNodeIpAddress()

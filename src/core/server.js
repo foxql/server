@@ -65,7 +65,7 @@ class server extends require('./bridges'){
                 res.send('<h1>Foxql.com</h1>');
             });
             this.server.listen(this.serverOptions.port, (req, res) => {
-                console.log('Foxql server is running...');
+                console.log('Foxql signalling server is running...');
                 this.registerBridgeList()
             });
         }
