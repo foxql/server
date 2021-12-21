@@ -57,7 +57,9 @@ class server extends require('./bridges'){
                 }
                 
                 socket.join(
-                    this.encryptOrigin(origin)
+                    this.encryptOrigin(
+                        origin.split(':')[0]
+                    )
                 )
             })
 
