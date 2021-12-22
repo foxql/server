@@ -17,14 +17,14 @@ module.exports  = class {
             socket.on('connect', function (){
                 socket.emit('register', nodeIpAddress)
             })
-            socket.on('transport', this.transportListener)
+            socket.on('transport', this.transportListener.bind(this))
             this.subscriptions[host] = socket
         });
     }   
 
-    transportListener(data)
+    transportListener({appName, ...data})
     {
-        //console.log(data)
+        this.io.to(appName).emit('eventSimulation', data)
     }
 
     buildNodeIpAddress()

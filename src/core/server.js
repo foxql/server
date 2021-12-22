@@ -129,7 +129,7 @@ class server extends require('./bridges'){
 
     encryptOrigin(origin)
     {
-        return sha256(origin)
+        return sha256(origin).toString()
     }
 
     
