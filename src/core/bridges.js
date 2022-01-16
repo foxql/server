@@ -22,9 +22,9 @@ module.exports  = class {
         });
     }   
 
-    transportListener({appName, ...data})
+    transportListener({appKey, ...data})
     {
-        this.io.to(appName).emit('eventSimulation', data)
+        this.io.to(appKey).emit('eventSimulation', data)
     }
 
     buildNodeIpAddress()
