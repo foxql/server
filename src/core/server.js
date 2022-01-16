@@ -45,7 +45,7 @@ class server extends require('./bridges'){
             });
 
             this.io.on('connection', socket => {
-                const {host: appName} = socket.request.headers;
+                const {origin} = socket.request.headers;
                 const id = socket.id;
 
                 this.pushClient(id);
@@ -57,7 +57,7 @@ class server extends require('./bridges'){
                 }
                 socket.join(
                     this.encryptOrigin(
-                        appName.split(':')[0]
+                        origin.split('://')[1]
                     )
                 )
             })
