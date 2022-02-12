@@ -22,6 +22,7 @@ class server extends require('./bridges'){
         };
 
         this.clientMap = {};
+        this.nodeIdMap = {};
 
         this.eventList = require('../events.js');
 
@@ -46,9 +47,6 @@ class server extends require('./bridges'){
 
             this.io.on('connection', socket => {
                 const {origin} = socket.request.headers;
-                const id = socket.id;
-
-                this.pushClient(id);
 
                 this.loadEvents(socket);
 
@@ -79,33 +77,16 @@ class server extends require('./bridges'){
         });
     }
 
-    pushClient(id)
-    {
-        if(this.clientMap[id] == undefined) this.clientMap[id] = [];
-    }
-
     disconnectClient(id)
     {
-        delete this.clientMap[id];
-    }
+        const nodeId = this.clientMap[id] || false
 
-    pushClientConnection(id, offerId)
-    {
-        if(this.clientMap[id]) this.clientMap[id].push(offerId);
-    }
-
-    getClientConnections(id)
-    {
-        return this.clientMap[id] || [];
-    }
-
-    dropClientConnection(id, offerId)
-    {
-        let connectionsList = this.getClientConnections(id);
-        const findConnectionIndex = connectionsList.indexOf(offerId);
-        if(findConnectionIndex > -1){
-            this.clientMap[id] = connectionsList.splice(findConnectionIndex, 1)
+        if(nodeId){
+            delete this.nodeIdMap[nodeId];
         }
+
+        delete this.clientMap[id];
+        
     }
 
     pushEvent(event)
@@ -130,6 +111,16 @@ class server extends require('./bridges'){
     encryptOrigin(origin)
     {
         return sha256(origin).toString()
+    }
+
+    findNode(id)
+    {
+        return this.nodeIdMap[id] || false
+    }
+
+    findNodeUuidKey(id)
+    {
+        return this.clientMap[id] || false
     }
 
     
