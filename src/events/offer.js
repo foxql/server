@@ -2,7 +2,7 @@ const name = 'offer';
 
 async function listener(socket, network, payload)
 {
-    const {to, signature = ''} = payload;
+    const {to, signature = '', offer} = payload;
    
     const target = network.findNode(to)
 
@@ -14,7 +14,7 @@ async function listener(socket, network, payload)
     
     network.io.to(target).emit('offer', {
         from : myNodeId,
-        sdp : payload.offer,
+        sdp : offer,
         signature : signature
     });
 }

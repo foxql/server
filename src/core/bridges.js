@@ -1,4 +1,4 @@
-const { io, protocol } = require("socket.io-client");
+const { io } = require("socket.io-client");
 
 module.exports  = class {
 
