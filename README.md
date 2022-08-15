@@ -20,7 +20,15 @@ npm run dev
 ``` javascript
 const foxql = require('@foxql/foxql-server');
 
-const server = new foxql.server();
+const server = new foxql.server(connection, [
+    'http://127.0.0.1:1923' // bridge server url
+]);
+
+async function connection(socket)
+{
+    console.log('New Connection');
+}
+
 
 server.open();  
 ```

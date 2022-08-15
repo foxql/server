@@ -47,17 +47,11 @@ class server extends require('./bridges'){
 
             this.io.on('connection', socket => {
                 const {origin} = socket.request.headers;
-
                 this.loadEvents(socket);
 
                 if(typeof this.socketConnectionListener === 'function'){
                     this.socketConnectionListener(socket);
                 }
-                socket.join(
-                    this.encryptOrigin(
-                        origin.split('://')[1]
-                    )
-                )
             })
 
             app.get('/', (req, res) => {
