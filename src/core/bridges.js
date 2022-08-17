@@ -12,10 +12,11 @@ module.exports  = class {
 
     registerBridgeList()
     {
+        const selfNodeAddress = this.nodeHostAddress
         this.bridgeList.forEach(host => {
             const socket = io(host)
             socket.on('connect', function (){
-                socket.emit('register', this.nodeHostAddress)
+                socket.emit('register', selfNodeAddress)
             })
             socket.on('transport', this.transportListener.bind(this))
             this.subscriptions[host] = socket
