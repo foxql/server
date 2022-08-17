@@ -3,9 +3,9 @@ const sha256 = require("crypto-js/sha256");
 
 class server extends require('./bridges'){ 
 
-    constructor(socketConnectionListener, bridgeList) {
+    constructor(socketConnectionListener, bridgeList, nodeHostAddress) {
 
-        super(bridgeList)
+        super(bridgeList, nodeHostAddress)
 
         this.io = null;
 

@@ -2,20 +2,20 @@ const { io } = require("socket.io-client");
 
 module.exports  = class {
 
-    constructor(bridgeList)
+    constructor(bridgeList, nodeHostAddress)
     {
         this.bridgeList = bridgeList
+        this.nodeHostAddress = nodeHostAddress
         this.subscriptions = {}
     }
 
 
     registerBridgeList()
     {
-        const nodeIpAddress = this.buildNodeIpAddress()
         this.bridgeList.forEach(host => {
             const socket = io(host)
             socket.on('connect', function (){
-                socket.emit('register', nodeIpAddress)
+                socket.emit('register', this.nodeHostAddress)
             })
             socket.on('transport', this.transportListener.bind(this))
             this.subscriptions[host] = socket
@@ -25,14 +25,6 @@ module.exports  = class {
     transportListener({appKey, ...data})
     {
         this.io.to(appKey).emit('eventSimulation', data)
-    }
-
-    buildNodeIpAddress()
-    {
-        const {protocol, port} = this.serverOptions
-        return {
-            protocol, port
-        }
     }
 
 }

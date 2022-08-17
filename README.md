@@ -22,7 +22,7 @@ const foxql = require('@foxql/foxql-server');
 
 const server = new foxql.server(connection, [
     'https://foxql-bridge.herokuapp.com' // bridge server url
-]);
+], '{YOUR_NODE_HOST}');
 
 async function connection(socket)
 {
