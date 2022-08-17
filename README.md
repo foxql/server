@@ -21,7 +21,7 @@ npm run dev
 const foxql = require('@foxql/foxql-server');
 
 const server = new foxql.server(connection, [
-    'http://127.0.0.1:1923' // bridge server url
+    'https://foxql-bridge.herokuapp.com' // bridge server url
 ]);
 
 async function connection(socket)
