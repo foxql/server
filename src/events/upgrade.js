@@ -6,7 +6,7 @@ async function listener(socket, network, {nodeId, dappAlias})
 
     const normalizeAlias = dappAlias.toLowerCase().trim()
 
-    if(nodeId.length !== 36 || (normalizeAlias.length > 32 || normalizeAlias.length < 4) ) return 
+    if((normalizeAlias.length > 32 || normalizeAlias.length < 4) ) return 
     
     socket.join(
         network.encryptOrigin(dappAlias)
